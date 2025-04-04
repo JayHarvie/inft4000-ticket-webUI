@@ -33,7 +33,7 @@ body, html {
 }
   
 .ticket-form {
-    width: 100%;
+    width: 80%;
     max-width: 600px; 
     padding: 20px;
     background-color: #fff;

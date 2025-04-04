@@ -65,7 +65,7 @@ function App() {
         icon: 'success',
         title: 'Ticket Purchase Successful!',
         text: 'You will receive your tickets via email within the next 2 weeks.',
-        confirmButtonColor: '#3085d6'
+        confirmButtonColor: '#ff4b2b'
       });
       reset(); // Reset the form fields
     } catch (error) {
