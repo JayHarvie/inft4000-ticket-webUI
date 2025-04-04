@@ -6,56 +6,63 @@ function App() {
   const [serverError, setServerError] = useState("");
   const [fieldErrors, setFieldErrors] = useState({});
 
-  const currentYear = new Date().getFullYear() % 100; // Get the current year last two digits
+  const currentYear = new Date().getFullYear() % 100;
 
   const handleFormSubmit = async (data) => {
     setServerError("");
-  
-    // Ensure month and year are in MM/YY format
+    setFieldErrors({});
+
     const formattedMonth = String(data.expirationMonth).padStart(2, "0");
     const formattedYear = String(data.expirationYear).padStart(2, "0");
-  
+
     const apiUrl = "https://nscc-0491179-ticketapi-f8cya2h8hxcsbea5.canadacentral-01.azurewebsites.net/api/tickets";
 
-    const requestData = { 
+    const requestData = {
       email: data.email,
       name: data.name,
       phone: data.phone,
-      quantity: String(data.quantity), // convert to string
+      quantity: String(data.quantity),
       creditCard: data.creditCard,
-      expiration: `${formattedMonth}/${formattedYear}`, // rename to match working JSON
+      expiration: `${formattedMonth}/${formattedYear}`,
       securityCode: data.securityCode,
       address: data.address,
       city: data.city,
       province: data.province,
       postalCode: data.postalCode,
       country: data.country,
-      concertId: "6", // string
+      concertId: "6",
     };
-  
+
     try {
       const response = await fetch(apiUrl, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(requestData),
       });
-    
+
       if (!response.ok) {
         if (response.status === 400) {
           const errorData = await response.json();
-          setFieldErrors(errorData.errors || {});
+
+          const normalizedErrors = {};
+          for (const key in errorData.errors) {
+            const normalizedKey = key.charAt(0).toLowerCase() + key.slice(1);
+            normalizedErrors[normalizedKey] = errorData.errors[key];
+          }
+
+          setFieldErrors(normalizedErrors);
           setServerError("Please correct the highlighted errors.");
         } else {
           throw new Error("Error occurred while submitting the form.");
         }
         return;
       }
-    
+
       // Success
       setFieldErrors({});
       setServerError("");
       console.log("Form submitted successfully:", requestData);
-    
+
     } catch (error) {
       setServerError(error.message || "An unexpected error occurred.");
     }
@@ -65,7 +72,7 @@ function App() {
     <div>
       <h1>Ticket Hub</h1>
       {serverError && <div className="alert alert-danger">{serverError}</div>}
-      
+
       <form onSubmit={handleSubmit(handleFormSubmit)} className="w-50">
         <div className="mb-3">
           <label className="form-label">Email</label>
@@ -75,8 +82,9 @@ function App() {
             className="form-control"
           />
           {errors.email && <span className="text-danger">{errors.email.message}</span>}
-          {fieldErrors.Email && <span className="text-danger">{fieldErrors.Email[0]}</span>}
+          {fieldErrors.email && <span className="text-danger">{fieldErrors.email[0]}</span>}
         </div>
+
         <div className="mb-3">
           <label className="form-label">Name</label>
           <input
@@ -85,8 +93,9 @@ function App() {
             className="form-control"
           />
           {errors.name && <span className="text-danger">{errors.name.message}</span>}
-          {fieldErrors.Name && <span className="text-danger">{fieldErrors.Name[0]}</span>}
+          {fieldErrors.name && <span className="text-danger">{fieldErrors.name[0]}</span>}
         </div>
+
         <div className="mb-3">
           <label className="form-label">Phone</label>
           <input
@@ -95,8 +104,9 @@ function App() {
             className="form-control"
           />
           {errors.phone && <span className="text-danger">{errors.phone.message}</span>}
-          {fieldErrors.Phone && <span className="text-danger">{fieldErrors.Phone[0]}</span>}
+          {fieldErrors.phone && <span className="text-danger">{fieldErrors.phone[0]}</span>}
         </div>
+
         <div className="mb-3">
           <label className="form-label">Quantity</label>
           <select
@@ -108,8 +118,9 @@ function App() {
             ))}
           </select>
           {errors.quantity && <span className="text-danger">{errors.quantity.message}</span>}
-          {fieldErrors.Quantity && <span className="text-danger">{fieldErrors.Quantity[0]}</span>}
+          {fieldErrors.quantity && <span className="text-danger">{fieldErrors.quantity[0]}</span>}
         </div>
+
         <div className="mb-3">
           <label className="form-label">Credit Card</label>
           <input
@@ -118,8 +129,9 @@ function App() {
             className="form-control"
           />
           {errors.creditCard && <span className="text-danger">{errors.creditCard.message}</span>}
-          {fieldErrors.CreditCard && <span className="text-danger">{fieldErrors.CreditCard[0]}</span>}
+          {fieldErrors.creditCard && <span className="text-danger">{fieldErrors.creditCard[0]}</span>}
         </div>
+
         <div className="mb-3">
           <label className="form-label">Expiration Date</label>
           <div style={{ display: 'flex', gap: '10px' }}>
@@ -145,8 +157,9 @@ function App() {
           </div>
           {errors.expirationMonth && <span className="text-danger">{errors.expirationMonth.message}</span>}
           {errors.expirationYear && <span className="text-danger">{errors.expirationYear.message}</span>}
-          {fieldErrors.Expiration && <span className="text-danger">{fieldErrors.Expiration[0]}</span>}
+          {fieldErrors.expiration && <span className="text-danger">{fieldErrors.expiration[0]}</span>}
         </div>
+
         <div className="mb-3">
           <label className="form-label">Security Code</label>
           <input
@@ -155,8 +168,9 @@ function App() {
             className="form-control"
           />
           {errors.securityCode && <span className="text-danger">{errors.securityCode.message}</span>}
-          {fieldErrors.SecurityCode && <span className="text-danger">{fieldErrors.SecurityCode[0]}</span>}
+          {fieldErrors.securityCode && <span className="text-danger">{fieldErrors.securityCode[0]}</span>}
         </div>
+
         <div className="mb-3">
           <label className="form-label">Address</label>
           <input
@@ -165,8 +179,9 @@ function App() {
             className="form-control"
           />
           {errors.address && <span className="text-danger">{errors.address.message}</span>}
-          {fieldErrors.Address && <span className="text-danger">{fieldErrors.Address[0]}</span>}
+          {fieldErrors.address && <span className="text-danger">{fieldErrors.address[0]}</span>}
         </div>
+
         <div className="mb-3">
           <label className="form-label">City</label>
           <input
@@ -175,8 +190,9 @@ function App() {
             className="form-control"
           />
           {errors.city && <span className="text-danger">{errors.city.message}</span>}
-          {fieldErrors.City && <span className="text-danger">{fieldErrors.City[0]}</span>}
+          {fieldErrors.city && <span className="text-danger">{fieldErrors.city[0]}</span>}
         </div>
+
         <div className="mb-3">
           <label className="form-label">Province</label>
           <input
@@ -185,8 +201,9 @@ function App() {
             className="form-control"
           />
           {errors.province && <span className="text-danger">{errors.province.message}</span>}
-          {fieldErrors.Province && <span className="text-danger">{fieldErrors.Province[0]}</span>}
+          {fieldErrors.province && <span className="text-danger">{fieldErrors.province[0]}</span>}
         </div>
+
         <div className="mb-3">
           <label className="form-label">Postal Code</label>
           <input
@@ -195,8 +212,9 @@ function App() {
             className="form-control"
           />
           {errors.postalCode && <span className="text-danger">{errors.postalCode.message}</span>}
-          {fieldErrors.PostalCode && <span className="text-danger">{fieldErrors.PostalCode[0]}</span>}
+          {fieldErrors.postalCode && <span className="text-danger">{fieldErrors.postalCode[0]}</span>}
         </div>
+
         <div className="mb-3">
           <label className="form-label">Country</label>
           <input
@@ -205,8 +223,9 @@ function App() {
             className="form-control"
           />
           {errors.country && <span className="text-danger">{errors.country.message}</span>}
-          {fieldErrors.Country && <span className="text-danger">{fieldErrors.Country[0]}</span>}
+          {fieldErrors.country && <span className="text-danger">{fieldErrors.country[0]}</span>}
         </div>
+
         <button type="submit" className="btn btn-primary">Submit</button>
       </form>
     </div>
