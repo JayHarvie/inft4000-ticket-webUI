@@ -17,10 +17,21 @@ function App() {
     const apiUrl = "https://nscc-0491179-ticketapi-f8cya2h8hxcsbea5.canadacentral-01.azurewebsites.net/api/tickets";
 
     const requestData = { 
-      ...data, 
-      concertId: 6,
-      expirationDate: `${formattedMonth}/${formattedYear}` // Format as MM/YY
+      email: data.email,
+      name: data.name,
+      phone: data.phone,
+      quantity: String(data.quantity), // convert to string
+      creditCard: data.creditCard,
+      expiration: `${formattedMonth}/${formattedYear}`, // rename to match working JSON
+      securityCode: data.securityCode,
+      address: data.address,
+      city: data.city,
+      province: data.province,
+      postalCode: data.postalCode,
+      country: data.country,
+      concertId: "6", // string, not number
     };
+    
   
     try {
       const response = await fetch(apiUrl, {
