@@ -4,7 +4,7 @@ import Swal from 'sweetalert2';
 import './App.css';
 
 function App() {
-  const { register, handleSubmit, formState: { errors } } = useForm();
+  const { register, handleSubmit, reset, formState: { errors } } = useForm();
   const [serverError, setServerError] = useState("");
   const [fieldErrors, setFieldErrors] = useState({});
 
@@ -67,6 +67,7 @@ function App() {
         text: 'You will receive your tickets via email within the next 2 weeks.',
         confirmButtonColor: '#3085d6'
       });
+      reset(); // Reset the form fields
     } catch (error) {
       setServerError(error.message || "An unexpected error occurred.");
     }
