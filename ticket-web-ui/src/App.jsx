@@ -10,11 +10,14 @@ function App() {
   const handleFormSubmit = async (data) => {
     setServerError("");
   
-    const apiUrl = "https://nscc-0491179-ticketapi-f8cya2h8hxcsbea5.canadacentral-01.azurewebsites.net/api/tickets";
+    // Ensure month and year are in MM/YY format
+    const formattedMonth = String(data.expirationMonth).padStart(2, "0");
+    const formattedYear = String(data.expirationYear).padStart(2, "0");
   
     const requestData = { 
       ...data, 
-      concertId: 6
+      concertId: 6,
+      expirationDate: `${formattedMonth}/${formattedYear}` // Format as MM/YY
     };
   
     try {
@@ -33,7 +36,6 @@ function App() {
       setServerError(error.message || "An unexpected error occurred.");
     }
   };
-  
 
   return (
     <div>
