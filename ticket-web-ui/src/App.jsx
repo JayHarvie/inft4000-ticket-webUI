@@ -10,8 +10,7 @@ function App() {
   const handleFormSubmit = async (data) => {
     setServerError("");
 
-    // API URL
-    const apiUrl = "https://nscc-0491179-ticketapi-f8cya2h8hxcsbea5.canadacentral-01.azurewebsites.net/api/tickets";
+    const apiUrl = "/api/tickets";  // Make sure you're using the relative API URL for the proxy
 
     try {
       const response = await fetch(apiUrl, {
