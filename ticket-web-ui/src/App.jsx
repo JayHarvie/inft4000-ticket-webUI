@@ -9,26 +9,31 @@ function App() {
 
   const handleFormSubmit = async (data) => {
     setServerError("");
-
+  
     const apiUrl = "https://nscc-0491179-ticketapi-f8cya2h8hxcsbea5.canadacentral-01.azurewebsites.net/api/tickets";
-
+  
+    const requestData = { 
+      ...data, 
+      concertId: 6
+    };
+  
     try {
       const response = await fetch(apiUrl, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data), // Send the data as JSON
+        body: JSON.stringify(requestData),
       });
-
+  
       if (!response.ok) {
         throw new Error('Error occurred while submitting the form.');
       }
-
-      // Handle successful form submission
-      console.log("Form submitted successfully:", data);
+  
+      console.log("Form submitted successfully:", requestData);
     } catch (error) {
       setServerError(error.message || "An unexpected error occurred.");
     }
   };
+  
 
   return (
     <div>
