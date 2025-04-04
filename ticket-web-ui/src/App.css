@@ -1,0 +1,112 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap');
+
+body, html {
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+  height: 100%;
+  background: url('../assets/MattRife-Poster.png') no-repeat center center fixed;
+  background-size: cover;
+}
+
+.app-container {
+    display: flex;
+    flex-direction: column; 
+    align-items: center;    
+    justify-content: flex-start; 
+    min-height: 100vh; 
+}
+  
+.event-header {
+    text-align: center;
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #fff;
+    background: linear-gradient(135deg, #ff416c, #ff4b2b);
+    padding: 15px 20px;
+    border-radius: 0; 
+    margin-bottom: 20px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    width: 100vw;
+    margin-left: 0;
+    margin-right: 0;
+}
+  
+.ticket-form {
+    width: 100%;
+    max-width: 600px; 
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+  
+
+.form-title {
+  text-align: center;
+  margin-bottom: 20px;
+  font-weight: 700;
+  font-size: 2rem;
+  color: #2c3e50;
+}
+
+.expiration-group {
+    display: flex;
+    gap: 20px;
+}
+  
+.expiration-month,
+.expiration-year {
+    width: 50%; 
+}
+  
+ 
+select {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 100%;
+}
+  
+.form-group label {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+  
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+  
+.form-group span {
+    color: red;
+    font-size: 12px;
+}
+  
+.submit-button {
+    background: linear-gradient(135deg, #ff416c, #ff4b2b);
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 999px; /* fully rounded pill style */
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  }
+  
+  .submit-button:hover {
+    background: linear-gradient(135deg, #e03b5d, #e64525);
+  }
+  
+
+.error-msg {
+  background-color: #f8d7da;
+  padding: 10px;
+  color: #721c24;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  text-align: center;
+}
