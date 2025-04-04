@@ -73,7 +73,7 @@ function App() {
       <h1>Ticket Hub</h1>
       {serverError && <div className="alert alert-danger">{serverError}</div>}
 
-      <form onSubmit={handleSubmit(handleFormSubmit)} className="w-50">
+      <form onSubmit={handleSubmit(handleFormSubmit)} className="w-50" noValidate>
         <div className="mb-3">
           <label className="form-label">Email</label>
           <input
