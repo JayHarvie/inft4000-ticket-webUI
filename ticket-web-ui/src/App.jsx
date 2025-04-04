@@ -10,13 +10,13 @@ function App() {
   const handleFormSubmit = async (data) => {
     setServerError("");
 
-    const apiUrl = "/tickets";  // Make sure you're using the relative API URL for the proxy
+    const apiUrl = "/api/tickets";  // Using the full path with '/api'
 
     try {
       const response = await fetch(apiUrl, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
+        body: JSON.stringify(data), // Send the data as JSON
       });
 
       if (!response.ok) {
