@@ -14,6 +14,8 @@ function App() {
     const formattedMonth = String(data.expirationMonth).padStart(2, "0");
     const formattedYear = String(data.expirationYear).padStart(2, "0");
   
+    const apiUrl = "https://nscc-0491179-ticketapi-f8cya2h8hxcsbea5.canadacentral-01.azurewebsites.net/api/tickets";
+
     const requestData = { 
       ...data, 
       concertId: 6,
