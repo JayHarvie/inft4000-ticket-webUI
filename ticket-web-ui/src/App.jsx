@@ -10,7 +10,7 @@ function App() {
   const handleFormSubmit = async (data) => {
     setServerError("");
 
-    const apiUrl = "/api/tickets";  // Using the full path with '/api'
+    const apiUrl = "https://nscc-0491179-ticketapi-f8cya2h8hxcsbea5.canadacentral-01.azurewebsites.net/api/tickets";
 
     try {
       const response = await fetch(apiUrl, {
