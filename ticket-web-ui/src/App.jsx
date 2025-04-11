@@ -5,13 +5,7 @@ import './App.css';
 
 function App() {
   const TICKET_PRICE = 142.91;
-  const {
-    register,
-    handleSubmit,
-    watch,
-    reset,
-    formState: { errors }
-  } = useForm();
+  const { register, handleSubmit, watch, reset, formState: { errors } } = useForm();
 
   const [currentPage, setCurrentPage] = useState(1);
   const [serverError, setServerError] = useState("");
@@ -102,6 +96,9 @@ function App() {
         {/* Page 1 - Basic Info */}
         {currentPage === 1 && (
           <>
+          <div className="header">
+            <h2 className="form-header">Personal Info</h2>
+          </div>
             <div className="form-group">
               <label>Email</label>
               <input type="email" {...register("email", { required: "Email is required." })} />
@@ -131,6 +128,9 @@ function App() {
         {/* Page 2 - Address Info */}
         {currentPage === 2 && (
           <>
+          <div className="header">
+            <h2 className="form-header">Location Info</h2>
+          </div>
             <div className="form-group">
               <label>Address</label>
               <input {...register("address", { required: "Address is required." })} />
@@ -166,7 +166,7 @@ function App() {
               {fieldErrors.country && <span>{fieldErrors.country[0]}</span>}
             </div>
 
-            <button type="button" className="submit-button" onClick={() => setCurrentPage(1)}>Back</button>
+            <button type="button" className="submit-button back-button" onClick={() => setCurrentPage(1)}>Back</button>
             <button type="button" className="submit-button" onClick={() => setCurrentPage(3)} disabled={!page2Valid}>Next</button>
           </>
         )}
@@ -174,6 +174,9 @@ function App() {
         {/* Page 3 - Quantity + Payment */}
         {currentPage === 3 && (
           <>
+          <div className="header">
+            <h2 className="form-header">Purchase Info</h2>
+          </div>
             <div className="form-group">
               <label># of Tickets</label>
               <select {...register("quantity", { required: "Quantity is required." })}>
@@ -228,7 +231,7 @@ function App() {
               {fieldErrors.securityCode && <span>{fieldErrors.securityCode[0]}</span>}
             </div>
 
-            <button type="button" className="submit-button" onClick={() => setCurrentPage(2)}>Back</button>
+            <button type="button" className="submit-button back-button" onClick={() => setCurrentPage(2)}>Back</button>
             <button type="submit" className="submit-button" disabled={!page3Valid}>Submit</button>
           </>
         )}

@@ -97,15 +97,20 @@ select {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
   }
   
-  .submit-button:hover {
+.submit-button:hover {
     background: linear-gradient(135deg, #e03b5d, #e64525);
-  }
+}
 
-  .submit-button:disabled {
+.submit-button:disabled {
     background-color: #ccc;
     cursor: not-allowed;
     opacity: 0.6;
-  }
+}
+
+.back-button {
+    margin-right: 1rem;
+}
+  
 
 .error-msg {
   background-color: #f8d7da;
